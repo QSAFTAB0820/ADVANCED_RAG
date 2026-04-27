@@ -1,0 +1,10 @@
+langchain
+langchain-openai
+langchain-community
+langchain-core
+langchain-classic
+chromadb
+rank_bm25
+tiktoken
+python-dotenv
+pypdf
