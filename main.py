@@ -1,14 +1,19 @@
 import sys #handle command line arguments
+import logging
 from agent import create_support_agent
+from retriever import KnowledgeBaseUnavailableError
 
 def main():
     print("------------------------------------------------")
     print("Initializing Advanced Customer Support Bot...")
     try: 
         agent = create_support_agent()
-    except Exception as e:
-        print(f"Error initializing agent: {e}")
-        print("Please ensure your OPENAI_API_KEY is defined in a .env file.")
+    except KnowledgeBaseUnavailableError as e:
+        print(e)
+        sys.exit(1)
+    except Exception:
+        logging.exception("Agent initialization failed")
+        print("The support assistant could not start. Check the application logs for details and verify your configuration, including OPENAI_API_KEY.")
         sys.exit(1)
 
     print("Bot is ready! Type 'exit' or 'quit' to stop.")
